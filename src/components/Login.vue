@@ -49,17 +49,85 @@
             </form>
           </div>
           <p class="has-text-grey">
-            <a @click="page ='signUp'">Sign Up</a>
+            <a @click="page = 'signUp'">Sign Up</a>
           </p>
+        </div>
+        <div
+          v-if="page === 'signUp'"
+          class="column is-4 is-offset-4"
+        >
+          <h1 class="title has-text-grey">
+            Sign Up
+          </h1>
+          <div class="box">
+            <form @submit.prevent="signUp">
+              <div class="field">
+                <div class="control">
+                  <ValidationProvider
+                    v-slot="{ errors }"
+                    name="email"
+                    rules="required|email"
+                  >
+                    <input
+                      v-model="email"
+                      class="input"
+                      type="email"
+                      placeholder="your@email.address"
+                    />
+                    <p class="help is-danger">
+                      {{ errors[0] }}
+                    </p>
+                  </ValidationProvider>
+                </div>
+              </div>
 
-          <div v-if="page === 'signUp'" class="column is-4 is-offset-4">
-            <h1 class="title has-text-grey">Sign Up</h1>
-            <div class="box">
-              <form @submit.prevent="signUp">
+              <div class="field">
+                <div class="control">
+                  <ValidationProvider
+                    v-slot="{ errors }"
+                    name="username"
+                    rules="required"
+                  >
+                    <input
+                      v-model="username"
+                      class="input"
+                      type="text"
+                      placeholder="Your username"
+                    >
+                    <p class="help is-danger">
+                      {{ errors[0] }}
+                    </p>
+                  </ValidationProvider>
+                </div>
+              </div>
 
-              </form>
-            </div>
+              <div class="field">
+                <div class="control">
+                  <ValidationProvider
+                    v-slot="{ errors }"
+                    name="password"
+                    rules="required|min:6"
+                  >
+                    <input
+                      v-model="password"
+                      class="input"
+                      type="password"
+                      placeholder="Your Password"
+                    >
+                    <p class="help is-danger">
+                      {{ errors[0] }}
+                    </p>
+                  </ValidationProvider>
+                </div>
+              </div>
+              <button class="button is-block is-info is-fullwidth">
+                Sign up
+              </button>
+            </form>
           </div>
+          <p class="has-text-grey">
+            <a @click="page = 'login'">Login</a>
+          </p>
         </div>
       </div>
     </div>
@@ -67,7 +135,7 @@
 </template>
 
 <script>
-import { FirebaseDb, FirebaseAuth} from '@/library/Database';
+import { FirebaseDb, FirebaseAuth} from '../library/Database';
 
 export default {
   name: "Login",

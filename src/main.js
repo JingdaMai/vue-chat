@@ -10,9 +10,9 @@ import { FirebaseApp } from "./library/Database";
 
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import { extend } from 'vee-validate';
-import { required, email, excluded } from 'vee-validate/dist/rules';
+import { required, email, min } from 'vee-validate/dist/rules';
 extend('email', email);
-extend('excluded', excluded);
+extend('min', min);
 extend('required', {
   ...required,
   message: 'This field is required'
