@@ -36,7 +36,7 @@
           v-model="newRoomName"
           type="text"
           class="input"
-          placeholder="New playlist"
+          placeholder="New channel"
         >
         <p class="control">
           <button

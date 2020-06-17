@@ -4,7 +4,7 @@
       <div class="column is-2">
         <Chatrooms
           :selected-chat-room-slug="selectedChatRoomSlug"
-          @setActiveRoom="setActiveRoom"
+          @set-active-room="setActiveRoom"
         />
       </div>
       <div class="column is-8">
@@ -134,11 +134,11 @@ export default {
     },
     kicked () {
       this.$router.push('/chat/general');
-    },
-    beforeRouteUpdate (to, from, next) {
-      this.selectedChatRoomSlug = to.params.slug;
-      next();
     }
+  },
+  beforeRouteUpdate (to, from, next) {
+    this.selectedChatRoomSlug = to.params.slug;
+    next();
   }
 }
 </script>

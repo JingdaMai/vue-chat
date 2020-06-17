@@ -172,7 +172,8 @@ export default {
           FirebaseDb.ref(`users/${data.user.uid}`).set({
             name: this.username
           });
-        });
+        })
+        .catch((error) => this.loginError = error.message);
     }
   }
 }

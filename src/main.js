@@ -12,7 +12,10 @@ import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import { extend } from 'vee-validate';
 import { required, email, min } from 'vee-validate/dist/rules';
 extend('email', email);
-extend('min', min);
+extend('min', {
+  ...min,
+  message: 'Password should be at least 6 characters'
+});
 extend('required', {
   ...required,
   message: 'This field is required'
