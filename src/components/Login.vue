@@ -138,7 +138,7 @@
 import { FirebaseDb, FirebaseAuth} from '../library/Database';
 
 export default {
-  name: "Login",
+  name: 'Login',
   data() {
     return {
       page: 'login',
@@ -146,16 +146,16 @@ export default {
       password: '',
       username: '',
       loginError: ''
-    };
+    }
   },
-  created() {
+  created () {
     FirebaseAuth.onAuthStateChanged((user) => {
       if (user) {
         this.$store.commit('SET_LOGIN', { uid: user.uid, email: user.email });
-        FirebaseDb.ref(`users/${user.uid}`).once('value')
-          .then(data => {
-            this.$store.commit('SET_USERNAME', data.val().name);
-          });
+
+        FirebaseDb.ref('users/' + user.uid).once('value').then((snapshot) => {
+          this.$store.commit('SET_USERNAME', snapshot.val().name);
+        })
 
         this.$router.push('/chat');
       }
@@ -164,7 +164,7 @@ export default {
   methods: {
     login() {
       FirebaseAuth.signInWithEmailAndPassword(this.email, this.password)
-        .catch((error) => this.loginError = error);
+        .catch((error) => this.loginError = error.message);
     },
     signUp() {
       FirebaseAuth.createUserWithEmailAndPassword(this.email, this.password)
